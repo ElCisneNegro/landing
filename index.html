@@ -71,6 +71,19 @@
       cursor: pointer;
     }
 
+    .message {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+
     /* CARRUSEL */
     .carousel {
       position: relative;
@@ -111,18 +124,12 @@
   <section class="signup">
     <h2>Únete antes que nadie</h2>
 
-    <form 
-  action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse" 
-  method="POST" 
-  target="hidden_iframe" 
-  onsubmit="submitted=true;"
->
-  <input type="email" name="entry.1273979865" placeholder="Tu email" required>
-  <button type="submit">Avisadme</button>
-</form>
+    <form id="signup-form">
+      <input type="email" name="user_email" placeholder="Tu email" required>
+      <button type="submit">Avisadme</button>
+    </form>
 
-<!-- iframe para evitar recarga de página -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+    <div id="form-message" class="message"></div>
   </section>
 
   <!-- CARRUSEL -->
@@ -132,7 +139,42 @@
     <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
   </section>
 
+  <!-- EMAILJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
   <script>
+    // Inicializar EmailJS
+    (function () {
+      emailjs.init("yVA9qyM6IeHCfRqxs");
+    })();
+
+    const form = document.getElementById("signup-form");
+    const messageDiv = document.getElementById("form-message");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      messageDiv.textContent = "Enviando...";
+      messageDiv.className = "message";
+
+      emailjs.sendForm(
+        "service_ju8q4be",
+        "template_0sl7gh5",
+        this
+      ).then(
+        function () {
+          messageDiv.textContent = "¡Gracias! Te avisaremos pronto 🖤";
+          messageDiv.classList.add("success");
+          form.reset();
+        },
+        function (error) {
+          messageDiv.textContent = "Hubo un error, por favor prueba de nuevo.";
+          messageDiv.classList.add("error");
+          console.error("EmailJS error:", error);
+        }
+      );
+    });
+
+    // Carrusel
     let index = 0;
     const images = document.querySelectorAll('.carousel img');
 
