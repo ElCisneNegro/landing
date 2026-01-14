@@ -39,17 +39,25 @@
     }
 
     .logo {
-      max-width: 220px;
-      margin-bottom: 40px;
+      max-width: 640px;
+      width: 100%;
+      margin-bottom: 20px;
       display: block;
     }
 
-    .left p {
-      font-size: 1.05rem;
-      line-height: 1.9;
-      color: #ddd;
+    .manifesto {
       max-width: 520px;
-      margin-bottom: 40px;
+      color: #ddd;
+      font-size: 1.05rem;
+      line-height: 1.85;
+    }
+
+    .manifesto p {
+      margin: 0 0 18px 0;
+    }
+
+    .manifesto p:last-child {
+      margin-bottom: 34px;
     }
 
     /* FORMULARIO */
@@ -129,7 +137,11 @@
         padding: 40px 30px;
       }
 
-      .left p {
+      .logo {
+        max-width: 480px;
+      }
+
+      .manifesto {
         font-size: 1rem;
       }
     }
@@ -144,25 +156,33 @@
   <section class="left">
     <img src="images/logo.png" alt="El Cisne Negro" class="logo">
 
-    <p>
-      Cuando todo cambia, nosotros permanecemos.
-      <br><br>
-      Defendemos la sobriedad frente al ruido, la identidad frente a la nostalgia.
-      Creemos en lo que trasciende: en la belleza de un coche clásico, en la calma
-      de una partida de ajedrez, en la grandeza de la montaña y el silencio de la naturaleza.
-      <br><br>
-      No somos modernos. Somos permanentes.
-      <br><br>
-      Creemos en la familia, en la tradición y en las cosas realmente importantes de la vida.
-      España también sabe vestir en silencio, y en ese silencio hay carácter, hay legado.
-      <br><br>
-      Esta comunidad no es para todos.
-      Es para quienes entienden que lo auténtico no se negocia,
-      que la verdadera elegancia es discreta
-      y que la vida se mide en principios, no en tendencias.
-      <br><br>
-      Si compartes esta visión, únete a quienes creen en lo que perdura.
-    </p>
+    <div class="manifesto">
+      <p>
+        Cuando todo cambia, nosotros permanecemos.
+        <br><br>
+        Defendemos la sobriedad frente al ruido, la identidad frente a la nostalgia.
+        Creemos en lo que trasciende: en la belleza de un coche clásico, en la calma
+        de una partida de ajedrez, en la grandeza de la montaña y el silencio de la naturaleza.
+      </p>
+
+      <p>
+        No somos modernos. Somos permanentes.
+       <br><br>
+        Creemos en la familia, en la tradición y en las cosas realmente importantes de la vida.
+        España también sabe vestir en silencio, y en ese silencio hay carácter, hay legado.
+      </p>
+
+      <p>
+        Esta comunidad no es para todos.
+        Es para quienes entienden que lo auténtico no se negocia,
+        que la verdadera elegancia es discreta
+        y que la vida se mide en principios, no en tendencias.
+      </p>
+
+      <p>
+        Si compartes esta visión, únete a quienes creen en lo que perdura.
+      </p>
+    </div>
 
     <form
       action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
