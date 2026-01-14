@@ -5,6 +5,9 @@
   <title>El Cisne Negro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Tipografía serif premium -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,42 +15,47 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: #fff;
       background: #000;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
     }
 
     .container {
       display: flex;
       width: 100vw;
       height: 100vh;
+      overflow: hidden;
     }
 
     /* IZQUIERDA */
     .left {
       width: 50%;
       background: #000;
-      padding: 60px;
+      padding: 70px 60px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+
+      /* corte inclinado */
+      clip-path: polygon(0 0, 95% 0, 100% 100%, 0% 100%);
+      z-index: 2;
     }
 
-    .left h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      font-weight: 600;
+    .logo {
+      max-width: 220px;
+      margin-bottom: 40px;
+      filter: invert(1);
     }
 
     .left p {
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 1.05rem;
+      line-height: 1.9;
       color: #ddd;
       max-width: 520px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
-    /* FORM */
+    /* FORMULARIO */
     form {
       display: flex;
       max-width: 420px;
@@ -57,17 +65,18 @@
       flex: 1;
       padding: 12px;
       border: none;
-      outline: none;
       font-size: 0.9rem;
+      font-family: Arial, sans-serif;
     }
 
     form button {
-      padding: 12px 20px;
+      padding: 12px 22px;
       border: none;
       background: #111;
       color: #fff;
       cursor: pointer;
       font-size: 0.9rem;
+      letter-spacing: 0.05em;
     }
 
     .thanks {
@@ -86,6 +95,7 @@
 
     .carousel img {
       position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -99,42 +109,17 @@
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.6);
       z-index: 1;
     }
 
-    /* INSTAGRAM */
-    .instagram {
-      position: absolute;
-      right: 30px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-    }
-
-    .instagram a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.4rem;
-      opacity: 0.8;
-    }
-
-    .instagram a:hover {
-      opacity: 1;
-    }
-
-    /* RESPONSIVE: sigue siendo 50/50 */
     @media (max-width: 768px) {
       .left {
-        padding: 30px;
-      }
-
-      .left h1 {
-        font-size: 2rem;
+        padding: 40px 30px;
       }
 
       .left p {
-        font-size: 0.95rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -142,80 +127,81 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- IZQUIERDA -->
-    <section class="left">
-      <h1>Estamos creando algo</h1>
+  <!-- IZQUIERDA -->
+  <section class="left">
+    <img src="Logo.png" alt="El Cisne Negro" class="logo">
 
-      <p>
-        Cuando todo cambia, nosotros permanecemos.
-        Defendemos la sobriedad frente al ruido, la identidad frente a la nostalgia.
-        Creemos en lo que trasciende: en la belleza de un coche clásico, en la calma
-        de una partida de ajedrez, en la grandeza de la montaña y el silencio de la naturaleza.
-        <br><br>
-        Valoramos la elegancia de un buen restaurante, el aroma de una buena carne,
-        la precisión del golf, la fuerza del ski o la nobleza de la hípica.
-        <br><br>
-        No somos modernos. Somos permanentes.
-        Creemos en la familia, en la tradición y en las cosas realmente importantes de la vida.
-        España también sabe vestir en silencio, y en ese silencio hay carácter, hay legado.
-        <br><br>
-        Esta comunidad no es para todos.
-        Es para quienes entienden que lo auténtico no se negocia,
-        que la verdadera elegancia es discreta
-        y que la vida se mide en principios, no en tendencias.
-      </p>
+    <p>
+      Cuando todo cambia, nosotros permanecemos.
+      Defendemos la sobriedad frente al ruido, la identidad frente a la nostalgia.
+      Creemos en lo que trasciende: en la belleza de un coche clásico, en la calma
+      de una partida de ajedrez, en la grandeza de la montaña y el silencio de la naturaleza.
+      <br><br>
+      Valoramos la elegancia de un buen restaurante, el aroma de una buena carne,
+      la precisión del golf, la fuerza del ski o la nobleza de la hípica.
+      <br><br>
+      No somos modernos. Somos permanentes.
+      Creemos en la familia, en la tradición y en las cosas realmente importantes de la vida.
+      España también sabe vestir en silencio, y en ese silencio hay carácter, hay legado.
+      <br><br>
+      Esta comunidad no es para todos.
+      Es para quienes entienden que lo auténtico no se negocia,
+      que la verdadera elegancia es discreta
+      y que la vida se mide en principios, no en tendencias.
+      <br><br>
+      Si compartes esta visión, únete a quienes creen en lo que perdura.
+    </p>
 
-      <form
-        action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
-        method="POST"
-        target="hidden_iframe"
-        onsubmit="document.getElementById('thanks').style.display='block';"
-      >
-        <input
-          type="email"
-          name="entry.1273979865"
-          placeholder="Tu email"
-          required
-        >
-        <button type="submit">Avisadme</button>
-      </form>
+    <form
+      action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="document.getElementById('thanks').style.display='block';"
+    >
+      <input type="email" name="entry.1273979865" placeholder="Tu email" required>
+      <button type="submit">Entrar</button>
+    </form>
 
-      <div id="thanks" class="thanks">
-        Gracias. Te avisaremos pronto.
-      </div>
+    <div id="thanks" class="thanks">
+      Gracias por unirte. Solo escribiremos cuando sea el momento adecuado.
+    </div>
 
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
-    </section>
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </section>
 
-    <!-- DERECHA -->
-    <section class="right">
-      <div class="carousel">
-        <img src="images/img1.jpg" class="active">
-        <img src="images/img2.jpg">
-        <img src="images/img3.jpg">
-      </div>
+  <!-- DERECHA -->
+  <section class="right">
+    <div class="carousel">
+      <img src="images/img1.jpg" class="active">
+      <img src="images/img2.jpg">
+      <img src="images/img3.jpg">
+      <img src="images/img4.jpg">
+      <img src="images/img5.jpg">
+      <img src="images/img6.jpg">
+      <img src="images/img7.jpg">
+      <img src="images/img8.jpg">
+      <img src="images/img9.jpg">
+      <img src="images/img10.jpg">
+      <img src="images/img11.jpg">
+      <img src="images/img12.jpg">
+    </div>
+    <div class="overlay"></div>
+  </section>
 
-      <div class="overlay"></div>
+</div>
 
-      <div class="instagram">
-        <a href="https://www.instagram.com/TU_CUENTA_AQUI" target="_blank">⌾</a>
-      </div>
-    </section>
+<script>
+  let index = 0;
+  const images = document.querySelectorAll('.carousel img');
 
-  </div>
-
-  <script>
-    let index = 0;
-    const images = document.querySelectorAll('.carousel img');
-
-    setInterval(() => {
-      images[index].classList.remove('active');
-      index = (index + 1) % images.length;
-      images[index].classList.add('active');
-    }, 4000);
-  </script>
+  setInterval(() => {
+    images[index].classList.remove('active');
+    index = (index + 1) % images.length;
+    images[index].classList.add('active');
+  }, 4000);
+</script>
 
 </body>
 </html>
