@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>El Cisne Negro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
+      background: #000;
+    }
+
+    .container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* IZQUIERDA */
+    .left {
+      width: 50%;
+      background: #000;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .left h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .left p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #ddd;
+      max-width: 520px;
+      margin-bottom: 30px;
+    }
+
+    /* FORM */
+    form {
+      display: flex;
+      max-width: 420px;
+    }
+
+    form input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    form button {
+      padding: 12px 20px;
+      border: none;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .thanks {
+      display: none;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* DERECHA */
+    .right {
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 1;
+    }
+
+    /* INSTAGRAM */
+    .instagram {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .instagram a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+
+    .instagram a:hover {
+      opacity: 1;
+    }
+
+    /* RESPONSIVE: sigue siendo 50/50 */
+    @media (max-width: 768px) {
+      .left {
+        padding: 30px;
+      }
+
+      .left h1 {
+        font-size: 2rem;
+      }
+
+      .left p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- IZQUIERDA -->
+    <section class="left">
+      <h1>Estamos creando algo</h1>
+
+      <p>
+        Cuando todo cambia, nosotros permanecemos.
+        Defendemos la sobriedad frente al ruido, la identidad frente a la nostalgia.
+        Creemos en lo que trasciende: en la belleza de un coche clásico, en la calma
+        de una partida de ajedrez, en la grandeza de la montaña y el silencio de la naturaleza.
+        <br><br>
+        Valoramos la elegancia de un buen restaurante, el aroma de una buena carne,
+        la precisión del golf, la fuerza del ski o la nobleza de la hípica.
+        <br><br>
+        No somos modernos. Somos permanentes.
+        Creemos en la familia, en la tradición y en las cosas realmente importantes de la vida.
+        España también sabe vestir en silencio, y en ese silencio hay carácter, hay legado.
+        <br><br>
+        Esta comunidad no es para todos.
+        Es para quienes entienden que lo auténtico no se negocia,
+        que la verdadera elegancia es discreta
+        y que la vida se mide en principios, no en tendencias.
+      </p>
+
+      <form
+        action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
+        method="POST"
+        target="hidden_iframe"
+        onsubmit="document.getElementById('thanks').style.display='block';"
+      >
+        <input
+          type="email"
+          name="entry.1273979865"
+          placeholder="Tu email"
+          required
+        >
+        <button type="submit">Avisadme</button>
+      </form>
+
+      <div id="thanks" class="thanks">
+        Gracias. Te avisaremos pronto.
+      </div>
+
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
+    </section>
+
+    <!-- DERECHA -->
+    <section class="right">
+      <div class="carousel">
+        <img src="images/img1.jpg" class="active">
+        <img src="images/img2.jpg">
+        <img src="images/img3.jpg">
+      </div>
+
+      <div class="overlay"></div>
+
+      <div class="instagram">
+        <a href="https://www.instagram.com/TU_CUENTA_AQUI" target="_blank">⌾</a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    let index = 0;
+    const images = document.querySelectorAll('.carousel img');
+
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, 4000);
+  </script>
+
+</body>
+</html>
