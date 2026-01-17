@@ -114,6 +114,16 @@
       white-space: nowrap;
     }
 
+    /* Estados deshabilitados (clave para evitar confusión) */
+    form button:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    form input:disabled {
+      opacity: 0.7;
+    }
+
     .thanks {
       display: none;
       margin-top: 12px;
@@ -226,7 +236,7 @@
   <section class="left">
     <img src="images/logo.png" alt="El Cisne Negro" class="logo">
 
-    <!-- TEXTO DESKTOP (ajustado al layout, con saltos editoriales) -->
+    <!-- TEXTO DESKTOP -->
     <p class="manifest-desktop">
       Cuando todo cambia, nosotros permanecemos.
       <br><br>
@@ -253,7 +263,7 @@
       únete a quienes creen en lo que perdura.
     </p>
 
-    <!-- TEXTO MOBILE (más corto) -->
+    <!-- TEXTO MOBILE -->
     <div class="manifest-mobile">
       <p class="lead">Cuando todo cambia,<br>nosotros permanecemos.</p>
 
@@ -267,13 +277,19 @@
     </div>
 
     <form
+      id="signupForm"
       action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
       method="POST"
       target="hidden_iframe"
-      onsubmit="document.getElementById('thanks').style.display='block';"
+      onsubmit="
+        document.getElementById('thanks').style.display='block';
+        document.getElementById('email').disabled = true;
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').innerText = 'Recibido'
+      "
     >
-      <input type="email" name="entry.1273979865" placeholder="Tu email" required>
-      <button type="submit">Entrar</button>
+      <input id="email" type="email" name="entry.1273979865" placeholder="Tu email" required>
+      <button id="submitBtn" type="submit">Entrar</button>
     </form>
 
     <div id="thanks" class="thanks">
