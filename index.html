@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <title>El Cisne Negro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Tipografía serif premium -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
+    /* Base */
     * { box-sizing: border-box; }
 
     body {
@@ -18,6 +17,7 @@
       font-family: 'Playfair Display', serif;
     }
 
+    /* Layout principal 50/50 (desktop) */
     .container {
       display: flex;
       width: 100vw;
@@ -25,7 +25,7 @@
       overflow: hidden;
     }
 
-    /* IZQUIERDA (DESKTOP) */
+    /* Bloque izquierdo: logo + manifiesto + formulario */
     .left {
       width: 50%;
       background: #000;
@@ -35,7 +35,7 @@
       justify-content: center;
       position: relative;
       z-index: 2;
-      padding-bottom: max(80px, 9vh);
+      padding-bottom: max(90px, 9vh); /* espacio reservado para accesos (desktop) */
       overflow: hidden;
     }
 
@@ -47,27 +47,22 @@
       display: block;
     }
 
-    /* TEXTO DESKTOP */
+    /* Texto desktop y mobile se separan para controlar narrativa y evitar “muro” en móvil */
     .manifest-desktop {
       color: #ddd;
       max-width: 520px;
       font-size: clamp(0.92rem, 1.1vw, 1.05rem);
       line-height: clamp(1.65, 1.2vw + 1.45, 1.9);
       margin: 0 0 clamp(18px, 2.8vh, 40px) 0;
-      white-space: normal;
     }
 
-    /* Texto MOBILE (oculto en desktop) */
-    .manifest-mobile {
-      display: none;
-      max-width: 560px;
-      color: #ddd;
-    }
+    .manifest-mobile { display: none; }
 
     .manifest-mobile p {
       margin: 0 0 12px 0;
       font-size: 0.98rem;
       line-height: 1.7;
+      color: #ddd;
     }
 
     .manifest-mobile .lead {
@@ -84,7 +79,7 @@
       margin: 12px 0;
     }
 
-    /* FORM */
+    /* Formulario (Google Forms) */
     form {
       display: flex;
       width: min(420px, 100%);
@@ -110,13 +105,12 @@
       white-space: nowrap;
     }
 
-    /* Botón deshabilitado OK */
+    /* Importante: el input se marca readOnly (no disabled) para que el email sí se envíe a Google Forms */
     form button:disabled {
       opacity: 0.55;
       cursor: default;
     }
 
-    /* Estado “enviado” del input (readOnly sí envía) */
     form input[readonly] {
       opacity: 0.75;
       cursor: default;
@@ -129,32 +123,14 @@
       color: #aaa;
     }
 
-    /* Instagram: logo blanco centrado abajo en el lado negro */
-    .instagram {
-      position: absolute;
-      left: 50%;
-      bottom: 26px;
-      transform: translateX(-50%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      opacity: 0.85;
-      text-decoration: none;
-      z-index: 5;
-    }
-    .instagram:hover { opacity: 1; }
-    .instagram svg { width: 22px; height: 22px; fill: #fff; }
-
-    /* DERECHA (DESKTOP) */
+    /* Bloque derecho: carrusel + overlay y corte diagonal (solo desktop) */
     .right {
       width: 50%;
       position: relative;
       overflow: hidden;
     }
 
-    /* CORTE DIAGONAL REAL (DESKTOP) */
+    /* Corte diagonal (disruptivo) para desktop */
     .right::before {
       content: "";
       position: absolute;
@@ -175,6 +151,7 @@
       object-fit: cover;
       display: none;
     }
+
     .carousel img.active { display: block; }
 
     .overlay {
@@ -184,7 +161,49 @@
       z-index: 1;
     }
 
-    /* Ajuste para portátiles tipo 1366x768 (14") */
+    /* Accesos inferiores (Privacidad / Contacto / Instagram) */
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .actions a {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .actions a:hover { opacity: 1; }
+
+    .actions svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      display: block;
+    }
+
+    /* Accesos desktop: centrados abajo en el bloque negro */
+    .actions-desktop {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+
+    /* Accesos mobile: se sitúan debajo del carrusel para mantener narrativa visual */
+    .actions-mobile {
+      display: none;
+      padding: 22px 0 34px;
+    }
+
+    /* Ajuste para portátiles tipo 1366x768 (14") sin obligar a bajar zoom */
     @media (max-width: 1400px) and (max-height: 820px) {
       .left {
         justify-content: flex-start;
@@ -195,7 +214,7 @@
       form input, form button { padding: 10px 14px; }
     }
 
-    /* MOBILE: sin corte diagonal en móvil */
+    /* Móvil: layout apilado, sin corte diagonal, texto “editorial” y accesos al final */
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -204,7 +223,7 @@
 
       .left {
         width: 100%;
-        padding: 44px 26px 92px 26px;
+        padding: 44px 26px 26px 26px;
         overflow: visible;
       }
 
@@ -223,112 +242,149 @@
       }
 
       .right::before { display: none; }
+
+      .actions-desktop { display: none; }
+      .actions-mobile { display: flex; }
     }
   </style>
 </head>
 
 <body>
-<div class="container">
+  <!-- Layout principal -->
+  <div class="container">
+    <!-- Izquierda: contenido -->
+    <section class="left">
+      <img src="images/logo.png" alt="El Cisne Negro" class="logo">
 
-  <section class="left">
-    <img src="images/logo.png" alt="El Cisne Negro" class="logo">
+      <p class="manifest-desktop">
+        Cuando todo cambia, nosotros permanecemos.
+        <br><br>
+        Defendemos la sobriedad frente al ruido.
+        <br>
+        La identidad frente a la moda.
+        <br><br>
+        Creemos en lo que no necesita explicación.
+        <br>
+        En lo que resiste al tiempo.
+        <br><br>
+        No somos modernos.
+        <br>
+        Somos permanentes.
+        <br><br>
+        Esta comunidad no es para todos.
+        <br>
+        Es para quienes entienden que lo auténtico no se negocia
+        <br>
+        y que la verdadera elegancia es discreta.
+        <br><br>
+        Si compartes esta visión,
+        <br>
+        únete a quienes creen en lo que perdura.
+      </p>
 
-    <!-- TEXTO DESKTOP -->
-    <p class="manifest-desktop">
-      Cuando todo cambia, nosotros permanecemos.
-      <br><br>
-      Defendemos la sobriedad frente al ruido.
-      <br>
-      La identidad frente a la moda.
-      <br><br>
-      Creemos en lo que no necesita explicación.
-      <br>
-      En lo que resiste al tiempo.
-      <br><br>
-      No somos modernos.
-      <br>
-      Somos permanentes.
-      <br><br>
-      Esta comunidad no es para todos.
-      <br>
-      Es para quienes entienden que lo auténtico no se negocia
-      <br>
-      y que la verdadera elegancia es discreta.
-      <br><br>
-      Si compartes esta visión, únete a quienes creen en lo que perdura.
-    </p>
+      <div class="manifest-mobile">
+        <p class="lead">Cuando todo cambia,<br>nosotros permanecemos.</p>
+        <p>Defendemos la sobriedad frente al ruido.<br>La identidad frente a la moda.</p>
+        <p class="highlight">No somos modernos.<br>Somos permanentes.</p>
+        <p>Esta comunidad no es para todos.<br>Lo auténtico no se negocia.<br>La elegancia es discreta.</p>
+        <p class="highlight">Si compartes esta visión,<br>únete a quienes creen en lo que perdura.</p>
+      </div>
 
-    <!-- TEXTO MOBILE -->
-    <div class="manifest-mobile">
-      <p class="lead">Cuando todo cambia,<br>nosotros permanecemos.</p>
+      <form
+        id="signupForm"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
+        method="POST"
+        target="hidden_iframe"
+        onsubmit="
+          document.getElementById('thanks').style.display='block';
+          document.getElementById('email').readOnly = true;
+          document.getElementById('submitBtn').disabled = true;
+          document.getElementById('submitBtn').innerText = 'RECIBIDO';
+        "
+      >
+        <input id="email" type="email" name="entry.1273979865" placeholder="Tu email" required>
+        <button id="submitBtn" type="submit">Entrar</button>
+      </form>
 
-      <p>Defendemos la sobriedad frente al ruido.<br>La identidad frente a la moda.</p>
+      <div id="thanks" class="thanks">
+        Gracias por unirte. Solo escribiremos cuando sea el momento adecuado.
+      </div>
 
-      <p class="highlight">No somos modernos.<br>Somos permanentes.</p>
+      <!-- Accesos (desktop) -->
+      <div class="actions actions-desktop" aria-label="Accesos">
+        <a href="privacidad.html" aria-label="Privacidad">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l8 4v6c0 5-3.4 9.6-8 10-4.6-.4-8-5-8-10V6l8-4z"/>
+          </svg>
+        </a>
 
-      <p>Esta comunidad no es para todos.<br>Lo auténtico no se negocia.<br>La elegancia es discreta.</p>
+        <a href="mailto:info@cisnenegro.es?subject=El%20Cisne%20Negro" aria-label="Contacto">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5.1-8-5.1V6h16v2.2zM4 18V10.6l7.5 4.8c.3.2.7.2 1 0L20 10.6V18H4z"/>
+          </svg>
+        </a>
 
-      <p class="highlight">Si compartes esta visión,<br>únete a quienes creen en lo que perdura.</p>
-    </div>
+        <a href="https://www.instagram.com/cisnenegro.es" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+          </svg>
+        </a>
+      </div>
 
-    <form
-      id="signupForm"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
-      method="POST"
-      target="hidden_iframe"
-      onsubmit="
-        document.getElementById('thanks').style.display='block';
-        document.getElementById('email').readOnly = true;   /* ✅ se envía igual */
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtn').innerText = 'RECIBIDO';
-      "
-    >
-      <input id="email" type="email" name="entry.1273979865" placeholder="Tu email" required>
-      <button id="submitBtn" type="submit">Entrar</button>
-    </form>
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
+    </section>
 
-    <div id="thanks" class="thanks">
-      Gracias por unirte. Solo escribiremos cuando sea el momento adecuado.
-    </div>
+    <!-- Derecha: carrusel -->
+    <section class="right">
+      <div class="carousel">
+        <img src="images/img1.jpg" class="active">
+        <img src="images/img2.jpg">
+        <img src="images/img3.jpg">
+        <img src="images/img4.jpg">
+        <img src="images/img5.jpg">
+        <img src="images/img6.jpg">
+        <img src="images/img7.jpg">
+        <img src="images/img8.jpg">
+        <img src="images/img9.jpg">
+        <img src="images/img10.jpg">
+        <img src="images/img11.jpg">
+        <img src="images/img12.jpg">
+      </div>
+      <div class="overlay"></div>
+    </section>
+  </div>
 
-    <a class="instagram" href="https://www.instagram.com/cisnenegro.es" target="_blank" aria-label="Instagram">
+  <!-- Accesos (mobile) -->
+  <div class="actions actions-mobile" aria-label="Accesos">
+    <a href="privacidad.html" aria-label="Privacidad">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2l8 4v6c0 5-3.4 9.6-8 10-4.6-.4-8-5-8-10V6l8-4z"/>
+      </svg>
+    </a>
+
+    <a href="mailto:info@cisnenegro.es?subject=El%20Cisne%20Negro" aria-label="Contacto">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5.1-8-5.1V6h16v2.2zM4 18V10.6l7.5 4.8c.3.2.7.2 1 0L20 10.6V18H4z"/>
+      </svg>
+    </a>
+
+    <a href="https://www.instagram.com/cisnenegro.es" target="_blank" rel="noopener" aria-label="Instagram">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
       </svg>
     </a>
+  </div>
 
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-  </section>
+  <!-- Carrusel: rotación simple (sin movimiento adicional) -->
+  <script>
+    let index = 0;
+    const images = document.querySelectorAll('.carousel img');
 
-  <section class="right">
-    <div class="carousel">
-      <img src="images/img1.jpg" class="active">
-      <img src="images/img2.jpg">
-      <img src="images/img3.jpg">
-      <img src="images/img4.jpg">
-      <img src="images/img5.jpg">
-      <img src="images/img6.jpg">
-      <img src="images/img7.jpg">
-      <img src="images/img8.jpg">
-      <img src="images/img9.jpg">
-      <img src="images/img10.jpg">
-      <img src="images/img11.jpg">
-      <img src="images/img12.jpg">
-    </div>
-    <div class="overlay"></div>
-  </section>
-
-</div>
-
-<script>
-  let index = 0;
-  const images = document.querySelectorAll('.carousel img');
-
-  setInterval(() => {
-    images[index].classList.remove('active');
-    index = (index + 1) % images.length;
-    images[index].classList.add('active');
-  }, 4000);
-</script>
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, 4000);
+  </script>
 </body>
 </html>
