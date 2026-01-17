@@ -35,11 +35,7 @@
       justify-content: center;
       position: relative;
       z-index: 2;
-
-      /* espacio reservado para IG abajo */
       padding-bottom: max(80px, 9vh);
-
-      /* en pantallas bajas, habilitamos scroll interno vía media query */
       overflow: hidden;
     }
 
@@ -114,14 +110,16 @@
       white-space: nowrap;
     }
 
-    /* Estados deshabilitados (clave para evitar confusión) */
+    /* Botón deshabilitado OK */
     form button:disabled {
       opacity: 0.55;
       cursor: default;
     }
 
-    form input:disabled {
-      opacity: 0.7;
+    /* Estado “enviado” del input (readOnly sí envía) */
+    form input[readonly] {
+      opacity: 0.75;
+      cursor: default;
     }
 
     .thanks {
@@ -210,7 +208,6 @@
         overflow: visible;
       }
 
-      /* mostrar texto móvil / ocultar desktop */
       .manifest-desktop { display: none; }
       .manifest-mobile { display: block; }
 
@@ -283,9 +280,9 @@
       target="hidden_iframe"
       onsubmit="
         document.getElementById('thanks').style.display='block';
-        document.getElementById('email').disabled = true;
+        document.getElementById('email').readOnly = true;   /* ✅ se envía igual */
         document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtn').innerText = 'Recibido'
+        document.getElementById('submitBtn').innerText = 'RECIBIDO';
       "
     >
       <input id="email" type="email" name="entry.1273979865" placeholder="Tu email" required>
