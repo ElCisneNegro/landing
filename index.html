@@ -30,13 +30,21 @@
       width: 50%;
       background: #000;
       padding: clamp(34px, 5vh, 70px) clamp(22px, 4vw, 60px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       position: relative;
       z-index: 2;
       padding-bottom: max(90px, 9vh); /* espacio reservado para accesos (desktop) */
       overflow: hidden;
+    }
+
+    /* Contenedor interno para centrar (logo + texto + suscripción) */
+    .left-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
     }
 
     .logo {
@@ -47,14 +55,34 @@
       display: block;
     }
 
+    /* Logo sobre el carrusel (solo móvil) */
+    .logo-carousel {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: min(78vw, 420px);
+      max-height: 22vh;
+      object-fit: contain;
+      z-index: 3;
+      pointer-events: none;
+    }
+
     /* Texto desktop y mobile se separan para controlar narrativa y evitar “muro” en móvil */
     .manifest-desktop {
       color: #ddd;
-      max-width: 520px;
-      font-size: clamp(0.92rem, 1.1vw, 1.05rem);
-      line-height: clamp(1.65, 1.2vw + 1.45, 1.9);
+      max-width: 700px;
+      font-size: clamp(0.95rem, 1.05vw, 1.08rem);
+      line-height: clamp(1.7, 1.1vw + 1.5, 2);
       margin: 0 0 clamp(18px, 2.8vh, 40px) 0;
     }
+
+    .manifest-desktop p {
+      margin: 0 0 14px 0;
+    }
+
+    .manifest-desktop p:last-child { margin-bottom: 0; }
 
     .manifest-mobile { display: none; }
 
@@ -83,6 +111,10 @@
     form {
       display: flex;
       width: min(420px, 100%);
+    }
+
+    .left-inner form {
+      justify-content: center;
     }
 
     form input {
@@ -205,11 +237,8 @@
 
     /* Ajuste para portátiles tipo 1366x768 (14") sin obligar a bajar zoom */
     @media (max-width: 1400px) and (max-height: 820px) {
-      .left {
-        justify-content: flex-start;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-      }
+      .left { overflow: auto; -webkit-overflow-scrolling: touch; }
+      .left-inner { justify-content: flex-start; }
       .manifest-desktop { margin-bottom: 18px; }
       form input, form button { padding: 10px 14px; }
     }
@@ -221,11 +250,19 @@
         height: auto;
       }
 
+      /* Carrusel arriba, contenido debajo */
+      .right { order: 1; }
+      .left { order: 2; }
+
       .left {
         width: 100%;
         padding: 44px 26px 26px 26px;
         overflow: visible;
       }
+
+      /* El logo pasa al carrusel */
+      .left-inner .logo { display: none; }
+      .logo-carousel { display: block; }
 
       .manifest-desktop { display: none; }
       .manifest-mobile { display: block; }
@@ -254,60 +291,48 @@
   <div class="container">
     <!-- Izquierda: contenido -->
     <section class="left">
-      <img src="images/logo.png" alt="El Cisne Negro" class="logo">
+      <div class="left-inner">
+        <img src="images/logo.png" alt="El Cisne Negro" class="logo">
 
-      <p class="manifest-desktop">
-        Cuando todo cambia, nosotros permanecemos.
-        <br><br>
-        Defendemos la sobriedad frente al ruido.
-        <br>
-        La identidad frente a la moda.
-        <br><br>
-        Creemos en lo que no necesita explicación.
-        <br>
-        En lo que resiste al tiempo.
-        <br><br>
-        No somos modernos.
-        <br>
-        Somos permanentes.
-        <br><br>
-        Esta comunidad no es para todos.
-        <br>
-        Es para quienes entienden que lo auténtico no se negocia
-        <br>
-        y que la verdadera elegancia es discreta.
-        <br><br>
-        Si compartes esta visión,
-        <br>
-        únete a quienes creen en lo que perdura.
-      </p>
+        <div class="manifest-desktop">
+          <p>Hubo un tiempo en el que muchos hombres comenzaron a sentir lo mismo, una incomodidad difícil de explicar. Como si el mundo avanzara demasiado rápido, pero en la dirección equivocada.</p>
+          <p>Las conversaciones se volvieron vacías y superficiales donde la prisa y el hedonismo sustituyen al criterio y la profundidad. Valores que antes se transmitían sin esfuerzo, empezaron a parecer antiguos, incómodos.</p>
+          <p>Algunos siguieron adelante sin hacerse preguntas. Otros, se detuvieron.</p>
+          <p>Volvieron al calor de la familia y a las amistades que exigen tanto como ofrecen. A las copas de vino cuyo sabor recuerda lo que nunca debió olvidarse. Allí donde la palabra tiene peso y el apretón de manos es un símbolo de honor.</p>
+          <p>El Cisne Negro nace; no como un refugio, sino como un punto de encuentro entre hombres que no necesitan alzar la voz para hacerse notar.</p>
+          <p>Hombres disciplinados que dominan el arte de lo sutil, más interesados en construir que en exhibirse. Más inclinados a servir que a demandar.</p>
+          <p>Aquí no encontrarás promesas grandilocuentes. Únete a quienes creen en lo que perdura.</p>
+        </div>
 
-      <div class="manifest-mobile">
-        <p class="lead">Cuando todo cambia,<br>nosotros permanecemos.</p>
-        <p>Defendemos la sobriedad frente al ruido.<br>La identidad frente a la moda.</p>
-        <p class="highlight">No somos modernos.<br>Somos permanentes.</p>
-        <p>Esta comunidad no es para todos.<br>Lo auténtico no se negocia.<br>La elegancia es discreta.</p>
-        <p class="highlight">Si compartes esta visión,<br>únete a quienes creen en lo que perdura.</p>
-      </div>
+        <div class="manifest-mobile">
+          <p>Hubo un tiempo en el que muchos hombres comenzaron a sentir lo mismo, una incomodidad difícil de explicar. Como si el mundo avanzara demasiado rápido, pero en la dirección equivocada.</p>
+          <p>Las conversaciones se volvieron vacías y superficiales donde la prisa y el hedonismo sustituyen al criterio y la profundidad. Valores que antes se transmitían sin esfuerzo, empezaron a parecer antiguos, incómodos.</p>
+          <p>Algunos siguieron adelante sin hacerse preguntas. Otros, se detuvieron.</p>
+          <p>Volvieron al calor de la familia y a las amistades que exigen tanto como ofrecen. A las copas de vino cuyo sabor recuerda lo que nunca debió olvidarse. Allí donde la palabra tiene peso y el apretón de manos es un símbolo de honor.</p>
+          <p>El Cisne Negro nace; no como un refugio, sino como un punto de encuentro entre hombres que no necesitan alzar la voz para hacerse notar.</p>
+          <p>Hombres disciplinados que dominan el arte de lo sutil, más interesados en construir que en exhibirse. Más inclinados a servir que a demandar.</p>
+          <p>Aquí no encontrarás promesas grandilocuentes. Únete a quienes creen en lo que perdura.</p>
+        </div>
 
-      <form
-        id="signupForm"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
-        method="POST"
-        target="hidden_iframe"
-        onsubmit="
-          document.getElementById('thanks').style.display='block';
-          document.getElementById('email').readOnly = true;
-          document.getElementById('submitBtn').disabled = true;
-          document.getElementById('submitBtn').innerText = 'RECIBIDO';
-        "
-      >
-        <input id="email" type="email" name="entry.1273979865" placeholder="Tu email" required>
-        <button id="submitBtn" type="submit">Entrar</button>
-      </form>
+        <form
+          id="signupForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfQmBZqHHofd0RMLzEPnCF2Tt_M0CkqMTH5jAm3VQrfACk21g/formResponse"
+          method="POST"
+          target="hidden_iframe"
+          onsubmit="
+            document.getElementById('thanks').style.display='block';
+            document.getElementById('email').readOnly = true;
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerText = 'RECIBIDO';
+          "
+        >
+          <input id="email" type="email" name="entry.1273979865" placeholder="Tu email" required>
+          <button id="submitBtn" type="submit">Entrar</button>
+        </form>
 
-      <div id="thanks" class="thanks">
-        Gracias por unirte. Solo escribiremos cuando sea el momento adecuado.
+        <div id="thanks" class="thanks">
+          Gracias por unirte. Solo escribiremos cuando sea el momento adecuado.
+        </div>
       </div>
 
       <!-- Accesos (desktop) -->
@@ -336,6 +361,7 @@
 
     <!-- Derecha: carrusel -->
     <section class="right">
+      <img src="images/logo.png" alt="El Cisne Negro" class="logo-carousel">
       <div class="carousel">
         <img src="images/img1.jpg" class="active">
         <img src="images/img2.jpg">
