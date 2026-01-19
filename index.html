@@ -76,6 +76,7 @@
       font-size: clamp(0.95rem, 1.05vw, 1.08rem);
       line-height: clamp(1.7, 1.1vw + 1.5, 2);
       margin: 0 0 clamp(18px, 2.8vh, 40px) 0;
+      text-align: left;
     }
 
     .manifest-desktop p {
@@ -84,13 +85,14 @@
 
     .manifest-desktop p:last-child { margin-bottom: 0; }
 
-    .manifest-mobile { display: none; }
+    .manifest-mobile { display: none; text-align: left; }
 
     .manifest-mobile p {
       margin: 0 0 12px 0;
       font-size: 0.98rem;
       line-height: 1.7;
       color: #ddd;
+      text-align: left;
     }
 
     .manifest-mobile .lead {
@@ -291,7 +293,7 @@
       left: 50%;
       bottom: 18px;
       transform: translateX(-50%);
-      width: min(920px, calc(100vw - 32px));
+      width: min(720px, calc(100vw - 32px));
       background: rgba(17,17,17,0.92);
       border: 1px solid rgba(255,255,255,0.14);
       border-radius: 18px;
@@ -311,7 +313,8 @@
       color: #ddd;
       font-size: 0.92rem;
       line-height: 1.5;
-      max-width: 640px;
+      flex: 1;
+      max-width: none;
     }
 
     .cookie-banner__text a {
@@ -319,6 +322,11 @@
       text-decoration: underline;
       text-underline-offset: 3px;
       opacity: 0.92;
+    }
+
+    .cookie-more {
+      margin-left: 6px;
+      white-space: nowrap;
     }
 
     .cookie-banner__actions {
@@ -347,6 +355,12 @@
     }
 
     .cookie-btn:hover { opacity: 0.95; }
+
+
+    /* Mantener el banner pegado al final tambien en desktop */
+    @media (min-width: 769px) {
+      .cookie-banner { bottom: 18px; }
+    }
 
     @media (max-width: 520px) {
       .cookie-banner {
@@ -521,8 +535,8 @@
   <!-- Cookie banner (minimal) -->
   <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies">
     <div class="cookie-banner__text">
-      Usamos cookies para medir el uso de la web y mejorar la experiencia.
-      Puedes aceptar o rechazar. <a href="privacidad.html#cookies">Más información</a>.
+      Utilizamos cookies para medir el uso de la web y mejorar la experiencia.
+      <span class="cookie-more"><a href="privacidad.html#cookies">Más información</a>.</span>
     </div>
     <div class="cookie-banner__actions">
       <button id="cookieReject" class="cookie-btn cookie-btn--ghost" type="button">Rechazar</button>
