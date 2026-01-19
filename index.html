@@ -293,16 +293,16 @@
       left: 50%;
       bottom: 18px;
       transform: translateX(-50%);
-      width: min(720px, calc(100vw - 32px));
+      width: min(660px, calc(100vw - 32px));
       background: rgba(17,17,17,0.92);
       border: 1px solid rgba(255,255,255,0.14);
       border-radius: 18px;
       padding: 14px 14px;
       z-index: 9999;
       display: none;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
@@ -313,8 +313,8 @@
       color: #ddd;
       font-size: 0.92rem;
       line-height: 1.5;
-      flex: 1;
-      max-width: none;
+      flex: 0 1 470px;
+      max-width: 470px;
     }
 
     .cookie-banner__text a {
@@ -366,7 +366,7 @@
       .cookie-banner {
         flex-direction: column;
         align-items: stretch;
-        gap: 12px;
+        gap: 10px;
       }
       .cookie-banner__text { max-width: none; text-align: center; }
       .cookie-banner__actions { justify-content: center; }
